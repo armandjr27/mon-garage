@@ -97,6 +97,15 @@ class Categorie extends CI_Controller {
 
         redirect(base_url('categorie'), 'location', 302);
     }
+
+    public function search()
+    {
+        $key = $this->input->post('search-category');
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($this->categorie_model->searchCategorie($key)));
+    }
 }
 
 /* End of file Categorie.php and path \application\controllers\categorie\Categorie.php */

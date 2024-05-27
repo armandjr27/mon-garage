@@ -160,6 +160,15 @@ class Voiture extends CI_Controller
 
     redirect(base_url('voiture'), 'location', 302);
   }
+
+  public function search()
+  {
+    $key = $this->input->post('search-voiture');
+
+    $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($this->voiture_model->searchVoiture($key)));
+  }
 }
 
 /* End of file Voiture.php and path \application\controllers\voiture\Voiture.php */

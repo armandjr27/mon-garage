@@ -34,6 +34,17 @@ class Voiture_model extends CI_Model
     {
         return $this->db->delete('voitures', ['id_voiture' => $id]);
     }
+
+    public function searchVoiture($key)
+    {
+        $this->db->select('*')
+                 ->from('voitures')
+                 ->join('categories', 'categories.id_categorie = voitures.id_categorie')
+                 ->like('marque', $key);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }
 
 

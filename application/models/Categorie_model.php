@@ -28,7 +28,14 @@ class Categorie_model extends CI_Model
     {
         return $this->db->delete('categories', ['id_categorie' => $id]);
     }                       
-                        
+    
+    public function searchCategorie($key)
+    {
+        $this->db->like('nom', $key);
+        $query = $this->db->get('categories');
+
+        return $query->result_array();
+    }
 }
 
 
