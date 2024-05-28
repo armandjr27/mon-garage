@@ -36,6 +36,9 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
+                        <div class="text-center">
+                            <img id="image-preview" src="#" alt="Image Preview" class="mb-3 img-thumbnail" style="display:none;"/>
+                        </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="image" name="image">
                             <label class="custom-file-label" for="image">Télécharger l'image correspondant</label>
@@ -43,8 +46,8 @@
                         <?php echo isset($_SESSION['error']) ? $_SESSION['error'] : ''; ?>
                     </div>
                     <?php echo isset($voiture['id_voiture']) 
-                        ? '<button type="submit" class="btn btn-success"> Modifier</button>' 
-                        : '<button type="submit" class="btn btn-primary"> Ajouter</button>'; 
+                        ? '<button type="submit" class="btn btn-success px-5 shadow"> Modifier</button>' 
+                        : '<button type="submit" class="btn btn-primary px-5 shadow"> Ajouter</button>'; 
                     ?>
                 </form>
             </div>

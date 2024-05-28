@@ -36,6 +36,10 @@ h1#title {
     color: #444;
 }
 
+.custom-file-input:lang(en)~.custom-file-label::after {
+    content: "Télécharger";
+}
+
 @media only screen and (max-width: 767px) {
 	.navbar {
 		padding: .5rem 1rem;
