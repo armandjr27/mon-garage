@@ -15,26 +15,27 @@ const addShadow = (className) => {
 // Traitement de la prévisualisation de l'image avec jquery et FileReader api
 const imagePreview = (input) => {
   //Check if there is a file that has been selected
-   if (input.files && input.files[0]) {
-     const reader = new FileReader();
-     
-     reader.onload = function(e) {
-       $('#image-preview').attr('src', e.target.result).css('display', 'inline-block');
-     }
-     
-     reader.readAsDataURL(input.files[0]);
-   }
- }
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#image-preview').attr('src', e.target.result).css('display', 'inline-block');
+    }
+    
+    reader.readAsDataURL(input.files[0]);
+  }
+}
  
-$("#image").change(() => setTimeout(imagePreview(this), 1800));
+$("#image").change((e) => setTimeout(imagePreview(e.target), 1800));
 
 // Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  const fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+$(".custom-file-input").change((e) => {
+  const fileName = $(e.target).val().split("\\").pop();
+  $(e.target).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
 $(document).ready(function() {
+  
   const baseUrl = "http://localhost/mon-garage/";
   let rowContent = 
     `<tr> 
@@ -47,4 +48,5 @@ $(document).ready(function() {
   $("#search-category").keyup(() => searchCategory(baseUrl, "#list-category", rowContent));
   $("#search-voiture").keyup(() => searchCar(baseUrl, "#list-car", rowContent));
   $("#search-card").keyup(() => searchCardCar(baseUrl, "#card-car"));
+
 });

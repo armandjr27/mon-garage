@@ -37,6 +37,8 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
+			
+			<p><?php echo $links; ?></p>
 		</div>
 	</div>
 </div>

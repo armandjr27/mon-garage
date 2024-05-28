@@ -3,13 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         
 class Voiture_model extends CI_Model 
 {
-    public function getVoitures($id = NULL)
+    public function getCountAll()
+    {
+        return $this->db->count_all('voitures');
+    }
+
+    public function getVoitures($limit = NULL, $start = NULL, $id = NULL)
     {
         $this->db->select('*')
                  ->from('voitures')
                  ->join('categories', 'categories.id_categorie = voitures.id_categorie');
         
         if (!$id) {
+            $this->db->limit($limit, $start);
             $query = $this->db->get();
             return $query->result_array();
         }

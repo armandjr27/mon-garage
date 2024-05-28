@@ -19,4 +19,5 @@
         </div>
     <?php endforeach ?>
 	</div>
+    <p><?php echo $links; ?></p>
 </div>

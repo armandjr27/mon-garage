@@ -55,14 +55,17 @@ $route['voiture/detail/(:num)']    = 'voiture/view/detail/$1';
 $route['voiture/modifier/(:num)']  = 'voiture/view/modifier/$1';
 $route['voiture/ajouter']          = 'voiture/view/ajouter';
 $route['voiture/save/(:num)']      = 'voiture/save/$1';
-$route['voiture']                  = 'voiture';
+$route['voiture/(:num)']           = 'voiture/index/$1';
+$route['voiture']                  = 'voiture/index/0';
 
 $route['categorie/supprimer/(:num)'] = 'categorie/delete/$1';
 $route['categorie/modifier/(:num)']  = 'categorie/view/modifier/$1';
 $route['categorie/ajouter']          = 'categorie/view/ajouter';
 $route['categorie/save/(:num)']      = 'categorie/save/$1';
-$route['categorie']                  = 'categorie';
+$route['categorie/(:num)']           = 'categorie/index/$1';
+$route['categorie']                  = 'categorie/index/0';
 
+$route['home/(:num)']        = 'pages/view/home/$1';
 $route['(:any)']             = 'pages/view/$1';
 $route['default_controller'] = 'pages/view';
 

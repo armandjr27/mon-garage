@@ -3,9 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         
 class Categorie_model extends CI_Model 
 {
-    public function getCategories($id = NULL)
+    public function getCountAll()
+    {
+        return $this->db->count_all('categories');
+    }
+
+    public function getCategories($limits = NULL, $start = NULL, $id = NULL)
     {
         if (!$id) {
+            $this->db->limit($limits, $start);
             $query = $this->db->get('categories');
             return $query->result_array();
         }
