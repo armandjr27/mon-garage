@@ -29,12 +29,12 @@ const imagePreview = (input) => {
 $("#image").change((e) => setTimeout(imagePreview(e.target), 1800));
 
 // Add the following code if you want the name of the file appear on select
-$(".custom-file-input").change((e) => {
-  const fileName = $(e.target).val().split("\\").pop();
-  $(e.target).siblings(".custom-file-label").addClass("selected").html(fileName);
+$(".custom-file-input").change(function() {
+  const fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
-$(document).ready(function() {
+$(function() {
   
   const baseUrl = "http://localhost/mon-garage/";
   let rowContent = 
@@ -45,8 +45,10 @@ $(document).ready(function() {
   addShadow(".card");
   //addShadow(".table");
 
-  $("#search-category").keyup(() => searchCategory(baseUrl, "#list-category", rowContent));
-  $("#search-voiture").keyup(() => searchCar(baseUrl, "#list-car", rowContent));
-  $("#search-card").keyup(() => searchCardCar(baseUrl, "#card-car"));
+  // $("#search-category").keyup(function(){
+  //   searchCategory(baseUrl, "#list-category", rowContent)
+  // });
+  // $("#search-voiture").keyup(() => searchCar(baseUrl, "#list-car", rowContent));
+  // $("#search-card").keyup(() => searchCardCar(baseUrl, "#card-car"));
 
 });

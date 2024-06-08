@@ -2,13 +2,13 @@
  * Voici les fonctions de recherche qu'on pourra effectuer sur l'application
  */
 
-const searchCategory = (baseUrl, target, rowContent) => {
+function searchCategory(baseUrl, target, rowContent) {
   const listCategory = $(target);
 
   $.ajax({
     type: "POST",
     url: `${baseUrl}categorie/search`,
-    data: { "search-category": $("#search-category").val() },
+    data: { "search-category": $(this).val() },
     success: function(response) {
       const categories = response;
       listCategory.html("");
@@ -34,18 +34,18 @@ const searchCategory = (baseUrl, target, rowContent) => {
       }
     },
     error: function(response) {
-      console.log(response.responseText);
+      console.log(response);
     }
   });
-};
+}
 
-const searchCar = (baseUrl, target, rowContent) => {
+function searchCar(baseUrl, target, rowContent) {
   const listCar = $(target);
 
   $.ajax({
     type: "POST",
     url: `${baseUrl}voiture/search`,
-    data: { "search-voiture": $("#search-voiture").val() },
+    data: { "search-voiture": $(this).val() },
     success: function(response) {
       const cars = response;
       listCar.html("");
@@ -77,50 +77,53 @@ const searchCar = (baseUrl, target, rowContent) => {
       console.log(response.responseText);
     }
   });
-};
+}
 
-const searchCardCar = (baseUrl, target) => {
+function searchCardCar(baseUrl, target) {
   const cardCar = $(target);
   let content = "";
+  const data = {'search-voiture': $(this).val()}
 
-  $.ajax({
-    type: "POST",
-    url: `${baseUrl}voiture/search`,
-    data: { "search-voiture": $("#search-card").val() },
-    success: function(response) {
-      const cars = response;
-      cardCar.html("");
-
-      if (cars.length <= 0) {
-        content = `<div class="col-12 mb-4" >
-              <p class="lead text-center card-text my-5">Aucune correspondance trouvé ! </p>
-            </div>`;
-
-        cardCar.append(content);
-      } else {
-        for (const car of cars) {
-          const { id_voiture, image, marque, numero, couleur, nom } = car;
-
-          content = `<div class="col-md-6 col-lg-4 mb-4">
-                <div class="card" style="height:460px;">
-                  <img src="${baseUrl}public/uploads/${image}" alt="${marque}-${numero}" title="${marque}-${numero}" class="card-img-top" loading="lazy"/>
-                    <div class="card-body">
-                      <h4 class="card-title font-weight-bolder mb-3">${marque}</h4>
-                      <p class="card-text mb-1"><strong>Couleur : </strong>${couleur}</p>
-                      <p class="card-text mb-1"><strong>Catégorie : </strong>${nom}</p>
-                      <a href="${baseUrl}voiture/detail/${id_voiture}" class="btn btn-primary btn-block mt-4">Plus d'info</a>
-                    </div>
-                </div>
+  if (data['search-voiture']) {
+    $.ajax({
+      type: "POST",
+      url: `${baseUrl}voiture/search`,
+      data: data,
+      success: function(response) {
+        const cars = response;
+        cardCar.html("");
+  
+        if (cars.length <= 0) {
+          content = `<div class="col-12 mb-4" >
+                <p class="lead text-center card-text my-5">Aucune correspondance trouvé ! </p>
               </div>`;
-
+  
           cardCar.append(content);
+        } else {
+          for (const car of cars) {
+            const { id_voiture, image, marque, numero, couleur, nom } = car;
+  
+            content = `<div class="col-md-6 col-lg-4 mb-4">
+                  <div class="card" style="height:460px;">
+                    <img src="${baseUrl}public/uploads/${image}" alt="${marque}-${numero}" title="${marque}-${numero}" class="card-img-top" loading="lazy"/>
+                      <div class="card-body">
+                        <h4 class="card-title font-weight-bolder mb-3">${marque}</h4>
+                        <p class="card-text mb-1"><strong>Couleur : </strong>${couleur}</p>
+                        <p class="card-text mb-1"><strong>Catégorie : </strong>${nom}</p>
+                        <a href="${baseUrl}voiture/detail/${id_voiture}" class="btn btn-primary btn-block mt-4">Plus d'info</a>
+                      </div>
+                  </div>
+                </div>`;
+  
+            cardCar.append(content);
+          }
         }
+      },
+      error: function(response) {
+        console.log(response.responseText);
       }
-    },
-    error: function(response) {
-      console.log(response.responseText);
-    }
-  });
-};
+    });
+  }
+}
 
 export { searchCategory, searchCar, searchCardCar };
